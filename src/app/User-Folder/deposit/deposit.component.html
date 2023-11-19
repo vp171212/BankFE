@@ -1,9 +1,47 @@
 <h1>Deposit</h1>
 <form [formGroup]="depositForm" (ngSubmit)="depositData(depositForm.value)">
-    <input type="text" formControlName="accountNumber" placeholder="Enter Account Number"><br>
-    <input type="text" formControlName="amount" placeholder="Enter Amount"><br>
-    <input type="text" formControlName="description" placeholder="Enter description"><br>
-    <input type="text" formControlName="state" placeholder="State"><br>
-    <input type="text" formControlName="transactionType" placeholder="TransactionType"><br>
-    <button>Deposit</button>
+  <div>
+    <label for="accountNumber">Account Number:</label>
+    <input type="text" id="accountNumber" formControlName="accountNumber" placeholder="Enter Account Number">
+    <small class="text-danger" *ngIf="formControls.accountNumber.errors?.required && formControls.accountNumber.touched">
+      Account Number is required.
+    </small>
+  </div>
+
+  <div>
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" formControlName="amount" placeholder="Enter Amount">
+    <small class="text-danger" *ngIf="formControls.amount.errors?.required && formControls.amount.touched">
+      Amount is required.
+    </small>
+    <small class="text-danger" *ngIf="formControls.amount.errors?.min && formControls.amount.touched">
+      Amount must be greater than or equal to 1.
+    </small>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <input type="text" id="description" formControlName="description" placeholder="Enter description">
+    <small class="text-danger" *ngIf="formControls.description.errors?.required && formControls.description.touched">
+      Description is required.
+    </small>
+  </div>
+
+  <div>
+    <label for="state">State:</label>
+    <input type="text" id="state" formControlName="state" placeholder="State">
+    <small class="text-danger" *ngIf="formControls.state.errors?.required && formControls.state.touched">
+      State is required.
+    </small>
+  </div>
+
+  <div>
+    <label for="transactionType">Transaction Type:</label>
+    <input type="text" id="transactionType" formControlName="transactionType" placeholder="TransactionType">
+    <small class="text-danger" *ngIf="formControls.transactionType.errors?.required && formControls.transactionType.touched">
+      Transaction Type is required.
+    </small>
+  </div>
+
+  <button type="submit">Deposit</button>
 </form>
