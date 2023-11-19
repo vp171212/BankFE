@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'; // Import Validators
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TransactionService } from 'src/app/service/transaction.service';
 
@@ -12,13 +12,18 @@ import { TransactionService } from 'src/app/service/transaction.service';
 export class WithdrawalComponent {
   withdrawalForm = new FormGroup({
     accountNumber: new FormControl('', [Validators.required]),
-    amount: new FormControl('', [Validators.required, Validators.min(1)]), // Added a minimum value of 1
+    amount: new FormControl('', [Validators.required, Validators.min(1)]),
     description: new FormControl('', [Validators.required]),
     state: new FormControl('', [Validators.required]),
     transactionType: new FormControl('', [Validators.required])
   });
 
   constructor(private deposit: TransactionService, private router: Router) {}
+
+  // Getter method to easily access form controls
+  get formControls() {
+    return this.withdrawalForm.controls;
+  }
 
   withdrawalData(data: any) {
     console.log(data);
@@ -34,8 +39,16 @@ export class WithdrawalComponent {
         }
       });
     } else {
-      // Show a message or handle invalid form
+      // Mark all form controls as touched to trigger error messages
+      this.markAllControlsAsTouched();
       alert('Please fill in all required fields.');
     }
+  }
+
+  // Method to mark all form controls as touched
+  private markAllControlsAsTouched() {
+    Object.values(this.withdrawalForm.controls).forEach(control => {
+      control.markAsTouched();
+    });
   }
 }

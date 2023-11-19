@@ -21,9 +21,22 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.minLength(5)]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)]],
       customerId: ['', [Validators.required]]
     });
+  }
+
+  // Convenience getters for easy access in the template
+  get userName() {
+    return this.registerForm.get('userName');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
+  get customerId() {
+    return this.registerForm.get('customerId');
   }
 
   registerUser() {

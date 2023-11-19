@@ -1,30 +1,56 @@
 <div class="card">
-    <div class="card-header">Withdraw Money</div>
-    <div  align="center" class="card-body">
-      <h5 class="card-title">Enter The Details</h5>
-      <div align="center" class="card" style="width: 18rem;">
-        <form [formGroup]="withdrawalForm" (ngSubmit)="withdrawalData(withdrawalForm.value)">
+  <div class="card-header">Withdraw Money</div>
+  <div align="center" class="card-body">
+    <h5 class="card-title">Enter The Details</h5>
+    <div align="center" class="card" style="width: 18rem;">
+      <form [formGroup]="withdrawalForm" (ngSubmit)="withdrawalData(withdrawalForm.value)">
         <ul class="list-group list-group-light">
-            
-          <li class="list-group-item px-3"><input type="text" formControlName="accountNumber" placeholder="Enter Account Number"><br></li>
-          <li class="list-group-item px-3"><input type="text" formControlName="amount" placeholder="Enter Amount"><br></li>
-          <li class="list-group-item px-3"><input type="text" formControlName="description" placeholder="Enter description"><br></li>
-          <li class="list-group-item px-3"><input type="text" formControlName="state" placeholder="State"><br></li>
-          <li class="list-group-item px-3"><input type="text" formControlName="transactionType" placeholder="TransactionType"><br><br></li>
-         
+
+          <li class="list-group-item px-3">
+            <input type="text" formControlName="accountNumber" placeholder="Enter Account Number"><br>
+            <small class="text-danger" *ngIf="withdrawalForm.get('accountNumber').hasError('required') && (withdrawalForm.get('accountNumber').dirty || withdrawalForm.get('accountNumber').touched)">
+              Account Number is required.
+            </small>
+          </li>
+          
+          <li class="list-group-item px-3">
+            <input type="text" formControlName="amount" placeholder="Enter Amount"><br>
+            <small class="text-danger" *ngIf="withdrawalForm.get('amount').hasError('required') && (withdrawalForm.get('amount').dirty || withdrawalForm.get('amount').touched)">
+              Amount is required.
+            </small>
+            <small class="text-danger" *ngIf="withdrawalForm.get('amount').hasError('min') && (withdrawalForm.get('amount').dirty || withdrawalForm.get('amount').touched)">
+              Amount must be greater than or equal to 1.
+            </small>
+          </li>
+
+          <li class="list-group-item px-3">
+            <input type="text" formControlName="description" placeholder="Enter description"><br>
+            <small class="text-danger" *ngIf="withdrawalForm.get('description').hasError('required') && (withdrawalForm.get('description').dirty || withdrawalForm.get('description').touched)">
+              Description is required.
+            </small>
+          </li>
+
+          <li class="list-group-item px-3">
+            <input type="text" formControlName="state" placeholder="State"><br>
+            <small class="text-danger" *ngIf="withdrawalForm.get('state').hasError('required') && (withdrawalForm.get('state').dirty || withdrawalForm.get('state').touched)">
+              State is required.
+            </small>
+          </li>
+
+          <li class="list-group-item px-3">
+            <input type="text" formControlName="transactionType" placeholder="TransactionType"><br><br>
+            <small class="text-danger" *ngIf="withdrawalForm.get('transactionType').hasError('required') && (withdrawalForm.get('transactionType').dirty || withdrawalForm.get('transactionType').touched)">
+              Transaction Type is required.
+            </small>
+          </li>
+
         </ul>
-    </form>
-      </div>
-      <a href="#" class="btn btn-primary">Withdraw</a>
+
+        <button type="submit" class="btn btn-primary">Withdraw</button>
+      </form>
     </div>
   </div>
-
+</div>
 
 <h1></h1>
 
-    
-    
-    
-    <!-- <input type="text" formControlName="state" placeholder="State"><br>
-    <input type="text" formControlName="transactionType" placeholder="TransactionType"><br> -->
-    <!-- <button>Withdraw</button> -->
